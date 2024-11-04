@@ -18,10 +18,6 @@ param tags object = {}
 
 var env = [
     {
-      name: 'SPRING_PROFILES_ACTIVE'
-      value: 'passwordless'
-    }
-    {
       name: 'SPRING_AI_AZURE_OPENAI_ENDPOINT'
       value: openAiEndpoint
     }
