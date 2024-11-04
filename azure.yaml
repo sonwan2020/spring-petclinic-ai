@@ -14,7 +14,7 @@ infra:
 
 services:
   api-gateway:
-    resourceName: api-gateway
+    resourceName: petclinic-ai
     project: ./
     host: containerapp
     language: java
