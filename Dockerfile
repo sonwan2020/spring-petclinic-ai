@@ -4,7 +4,7 @@ FROM mcr.microsoft.com/openjdk/jdk:17-distroless
 
 ARG VERSION=3.3.0
 
-COPY ./target/spring-petclinic-$VERSION-SNAPSHOT.jar app.jar
+COPY ./target/spring-petclinic-ai-$VERSION-SNAPSHOT.jar app.jar
 
 EXPOSE 8080
 
