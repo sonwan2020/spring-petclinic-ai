@@ -18,11 +18,11 @@ param tags object = {}
 
 var env = [
     {
-      name: 'SPRING_AI_AZURE_OPENAI_ENDPOINT'
+      name: 'AZURE_OPENAI_ENDPOINT'
       value: openAiEndpoint
     }
     {
-      name: 'SPRING_AI_AZURE_OPENAI_CLIENT_ID'
+      name: 'AZURE_OPENAI_CLIENT_ID'
       value: umiAppsClientId
     }
   ]
