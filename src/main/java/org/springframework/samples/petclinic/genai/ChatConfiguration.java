@@ -37,7 +37,6 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.Resource;
 
 import com.azure.ai.openai.OpenAIClient;
@@ -47,7 +46,7 @@ import com.azure.identity.DefaultAzureCredentialBuilder;
 import java.util.List;
 
 @Configuration
-@EnableConfigurationProperties({ ChatAuthProperties.class })
+@EnableConfigurationProperties({ ChatAuthProperties.class, ChatOptionsProperties.class })
 class ChatConfiguration {
 
 	@Value("classpath:/prompts/system.st")
@@ -59,8 +58,8 @@ class ChatConfiguration {
 	 * Configure a bean of type AzureOpenAiChatModel as ChatModel
 	 */
 	@Bean
-	@ConditionalOnProperty(ChatModelProperties.PREFIX + ".deployment-name")
-	public AzureOpenAiChatModel chatModel(OpenAIClient openAIClient, ChatModelProperties properties) {
+	@ConditionalOnProperty(ChatOptionsProperties.PREFIX + ".deployment-name")
+	public AzureOpenAiChatModel chatModel(OpenAIClient openAIClient, ChatOptionsProperties properties) {
 		var openAIChatOptions = AzureOpenAiChatOptions.builder()
 			.withDeploymentName(properties.getDeploymentName())
 			.withTemperature(properties.getTemperature())
@@ -117,8 +116,7 @@ class ChatConfiguration {
 	 */
 	@Bean
 	public VectorStore simpleVectorStore(EmbeddingModel embeddingModel) {
-		Resource resource = new DefaultResourceLoader().getResource("classpath:petclinic-terms-of-use.txt");
-		TextReader textReader = new TextReader(resource);
+		TextReader textReader = new TextReader(systemResource);
 		List<Document> documents = new TokenTextSplitter().apply(textReader.get());
 		VectorStore store = new SimpleVectorStore(embeddingModel);
 		store.add(documents);

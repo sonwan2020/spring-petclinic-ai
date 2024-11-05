@@ -21,8 +21,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @Getter
 @Setter
-@ConfigurationProperties(prefix = ChatModelProperties.PREFIX)
-public class ChatModelProperties {
+@ConfigurationProperties(prefix = ChatOptionsProperties.PREFIX)
+public class ChatOptionsProperties {
 
 	static final String PREFIX = "spring.ai.azure.openai.chat.options";
 
