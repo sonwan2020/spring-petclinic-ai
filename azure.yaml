@@ -48,7 +48,7 @@ hooks:
   prepackage:
     posix:
       shell: sh
-      run: 'chmod +x ./mvnw; ./mvnw clean package -DskipTests'
+      run: './mvnw clean package -DskipTests'
     windows:
       shell: pwsh
       run: './mvnw.cmd clean package -DskipTests'

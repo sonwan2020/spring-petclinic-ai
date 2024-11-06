@@ -12,4 +12,4 @@ NC='\033[0m' # No Color
 echo ""
 echo -e "${GREEN}INFO:${NC} Deploy finish succeed!"
 
-echo -e "${GREEN}INFO:${NC} Api Gateway App url: https://$appFqdn"
+echo -e "${GREEN}INFO:${NC} App url: https://$appFqdn"

@@ -9,4 +9,4 @@ Write-Host "INFO: " -ForegroundColor Green -NoNewline;
 Write-Host "Deploy finish succeed!"
 
 Write-Host "INFO: " -ForegroundColor Green -NoNewline;
-Write-Host "Api Gateway App url: https://$env:appFqdn"
+Write-Host "App url: https://$env:appFqdn"
