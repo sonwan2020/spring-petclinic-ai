@@ -15,7 +15,7 @@ apply plugin: 'io.spring.javaformat'
 gradle.startParameter.excludedTaskNames += [ "checkFormatAot", "checkFormatAotTest" ]
 
 group = 'org.springframework.samples'
-version = '3.3.0'
+version = '3.3.0-SNAPSHOT'
 
 java {
   sourceCompatibility = JavaVersion.VERSION_17
@@ -42,7 +42,8 @@ dependencies {
   implementation 'javax.cache:cache-api'
   implementation 'jakarta.xml.bind:jakarta.xml.bind-api'
   implementation 'com.azure:azure-identity:1.14.0'
-  implementation 'org.projectlombok:lombok:1.18.34'
+  compileOnly 'org.projectlombok:lombok:1.18.34'
+  annotationProcessor 'org.projectlombok:lombok:1.18.34'
   runtimeOnly 'org.springframework.boot:spring-boot-starter-actuator'
   runtimeOnly "org.webjars.npm:bootstrap:${webjarsBootstrapVersion}"
   runtimeOnly "org.webjars.npm:font-awesome:${webjarsFontawesomeVersion}"
