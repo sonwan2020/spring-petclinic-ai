@@ -39,6 +39,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.core.io.Resource;
 
 import com.azure.ai.openai.OpenAIClient;
@@ -49,6 +50,7 @@ import java.util.List;
 
 @Configuration
 @EnableConfigurationProperties({ ChatAuthProperties.class, ChatOptionsProperties.class })
+@Lazy
 class ChatConfiguration {
 
 	@Value("classpath:/prompts/system.st")
@@ -80,7 +82,7 @@ class ChatConfiguration {
 	 * EmbeddingModel
 	 */
 	@Bean
-	@ConditionalOnProperty(ChatAuthProperties.PREFIX + ".endpoint")
+	@ConditionalOnProperty(ChatAuthProperties.PREFIX + ".client-id")
 	public OpenAIClient openAIClient(ChatAuthProperties properties) {
 		return new OpenAIClientBuilder().endpoint(properties.getEndpoint())
 			.credential(new DefaultAzureCredentialBuilder().managedIdentityClientId(properties.getClientId()).build())
