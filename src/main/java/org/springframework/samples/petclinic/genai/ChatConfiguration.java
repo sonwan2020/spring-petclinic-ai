@@ -31,6 +31,7 @@ import org.springframework.ai.transformer.splitter.TokenTextSplitter;
 import org.springframework.ai.vectorstore.SearchRequest;
 import org.springframework.ai.vectorstore.SimpleVectorStore;
 import org.springframework.ai.vectorstore.VectorStore;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -52,6 +53,7 @@ class ChatConfiguration {
 	@Value("classpath:/prompts/system.st")
 	private Resource systemResource;
 
+	@Autowired
 	private ApplicationContext applicationContext;
 
 	/**
@@ -89,7 +91,8 @@ class ChatConfiguration {
 	 */
 	@Bean
 	public ChatClient chatClient(ChatClient.Builder chatClientBuilder) {
-		return chatClientBuilder.build();
+		return chatClientBuilder.defaultFunctions("listOwners", "listVets", "addPetToOwner", "addOwnerToPetclinic")
+			.build();
 	}
 
 	/**
