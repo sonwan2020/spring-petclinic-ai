@@ -17,7 +17,9 @@
 package org.springframework.samples.petclinic;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.DisabledInNativeImage;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,12 +35,13 @@ import org.springframework.samples.petclinic.vet.VetRepository;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.aot.DisabledInAotMode;
 import org.springframework.web.client.RestTemplate;
+import org.testcontainers.DockerClientFactory;
 import org.testcontainers.containers.MySQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-@ActiveProfiles("mysql")
+@ActiveProfiles({ "mysql", "test" })
 @Testcontainers(disabledWithoutDocker = true)
 @DisabledInNativeImage
 @DisabledInAotMode
@@ -56,6 +59,11 @@ class MySqlIntegrationTests {
 
 	@Autowired
 	private RestTemplateBuilder builder;
+
+	@BeforeAll
+	static void available() {
+		assumeTrue(DockerClientFactory.instance().isDockerAvailable(), "Docker not available");
+	}
 
 	@Test
 	void testFindAll() throws Exception {

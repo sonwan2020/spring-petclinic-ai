@@ -16,16 +16,18 @@
 
 package org.springframework.samples.petclinic.genai;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
+import java.util.List;
+import java.util.function.Function;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Description;
+import org.springframework.context.annotation.Profile;
 import org.springframework.samples.petclinic.owner.Owner;
 import org.springframework.samples.petclinic.owner.Pet;
 import org.springframework.samples.petclinic.vet.Vet;
 
-import java.util.List;
-import java.util.function.Function;
+import com.fasterxml.jackson.core.JsonProcessingException;
 
 /**
  * This class defines the @Bean functions that the LLM provider will invoke when it
@@ -35,6 +37,8 @@ import java.util.function.Function;
  *
  * @author Oded Shopen
  */
+
+@Profile({ "!test" })
 @Configuration
 class AIFunctionConfiguration {
 
