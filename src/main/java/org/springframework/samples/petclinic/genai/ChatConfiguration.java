@@ -36,19 +36,18 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Lazy;
+import org.springframework.context.annotation.Profile;
 import org.springframework.core.io.Resource;
 import org.springframework.samples.petclinic.conditions.ConditionalOnPropertyNotEmpty;
 
 import com.azure.ai.openai.OpenAIClient;
 import com.azure.ai.openai.OpenAIClientBuilder;
+import com.azure.core.credential.AzureKeyCredential;
 import com.azure.identity.DefaultAzureCredentialBuilder;
 
-import com.azure.core.credential.AzureKeyCredential;
-
+@Profile({ "!test" })
 @Configuration
 @EnableConfigurationProperties({ ChatAuthProperties.class, ChatOptionsProperties.class })
-@Lazy
 class ChatConfiguration {
 
 	@Value("classpath:/prompts/system.st")

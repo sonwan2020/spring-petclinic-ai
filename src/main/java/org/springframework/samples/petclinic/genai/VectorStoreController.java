@@ -24,6 +24,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.ai.vectorstore.SimpleVectorStore;
 import org.springframework.ai.vectorstore.VectorStore;
 import org.springframework.boot.context.event.ApplicationStartedEvent;
+import org.springframework.context.annotation.Profile;
 import org.springframework.context.event.EventListener;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.ClassPathResource;
@@ -39,6 +40,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  *
  * @author Oded Shopen
  */
+@Profile({ "!test" })
 @Component
 public class VectorStoreController {
 
