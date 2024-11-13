@@ -16,20 +16,18 @@
 
 package org.springframework.samples.petclinic;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assumptions.assumeTrue;
-
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.DisabledInNativeImage;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.event.ApplicationPreparedEvent;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
@@ -47,9 +45,9 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.web.client.RestTemplate;
 import org.testcontainers.DockerClientFactory;
 
-@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT, properties = { "spring.docker.compose.skip.in-tests=false", //
-		"spring.docker.compose.profiles.active=postgres" })
-@ActiveProfiles("postgres")
+@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT,
+		properties = { "spring.docker.compose.skip.in-tests=false", "spring.docker.compose.profiles.active=postgres" })
+@ActiveProfiles({ "postgres", "test" })
 @DisabledInNativeImage
 public class PostgresIntegrationTests {
 
@@ -65,16 +63,6 @@ public class PostgresIntegrationTests {
 	@BeforeAll
 	static void available() {
 		assumeTrue(DockerClientFactory.instance().isDockerAvailable(), "Docker not available");
-	}
-
-	public static void main(String[] args) {
-		new SpringApplicationBuilder(PetClinicApplication.class) //
-			.profiles("postgres") //
-			.properties( //
-					"spring.docker.compose.profiles.active=postgres" //
-			) //
-			.listeners(new PropertiesLogger()) //
-			.run(args);
 	}
 
 	@Test

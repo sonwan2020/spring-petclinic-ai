@@ -16,11 +16,12 @@
 
 package org.springframework.samples.petclinic.genai;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import java.util.List;
+
 import org.springframework.ai.document.Document;
 import org.springframework.ai.vectorstore.SearchRequest;
 import org.springframework.ai.vectorstore.VectorStore;
+import org.springframework.context.annotation.Profile;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -28,7 +29,8 @@ import org.springframework.samples.petclinic.owner.Owner;
 import org.springframework.samples.petclinic.owner.OwnerRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * Functions that are invoked by the LLM will use this bean to query the system of record
@@ -36,6 +38,8 @@ import java.util.List;
  *
  * @author Oded Shopen
  */
+
+@Profile({ "!test" })
 @Service
 public class AIDataProvider {
 
