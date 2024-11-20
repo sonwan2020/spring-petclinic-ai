@@ -13,3 +13,6 @@ echo ""
 echo -e "${GREEN}INFO:${NC} Deploy finish succeed!"
 
 echo -e "${GREEN}INFO:${NC} App url: https://$appFqdn"
+
+domain=$(az account show -o tsv --query tenantDefaultDomain)
+echo -e "${GREEN}INFO:${NC} Resource Group: $environmentPortal/#@$domain/resource$resourceGroupId"
